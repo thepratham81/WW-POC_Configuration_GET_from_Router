@@ -1,0 +1,18 @@
+---
+- name: Show examples
+  hosts: iosxe
+  gather_facts: no
+
+  tasks:
+  - name: GATHERING FACTS
+    ios_facts:
+      gather_subset: hardware
+
+  - name: run show dns configuration
+    ios_command:
+      commands: show ip name-server
+    register: dns_configuration
+  
+  - name: display dns configuration
+    debug:
+      var: dns_configuration["stdout_lines"][0]

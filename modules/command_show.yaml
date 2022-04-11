@@ -1,0 +1,117 @@
+---
+- name: Show examples
+  hosts: iosxe
+  gather_facts: no
+
+  tasks:
+  - name: GATHERING FACTS
+    ios_facts:
+      gather_subset: hardware
+
+  - name: run show version
+    ios_command:
+      commands: show version
+    register: version
+  
+  - name: display version
+    debug:
+      var: version["stdout_lines"][0]
+
+  - name: run show hostname
+    ios_command:
+      commands: sh run | i hostname
+    register: hostname
+  
+  - name: display hostname
+    debug:
+      var: hostname["stdout_lines"][0]
+
+  - name: run show ip int brief
+    ios_command:
+      commands: show ip interface brief
+    register: interfaces
+
+  - name: display interfaces
+    debug:
+      var: interfaces["stdout_lines"][0]
+
+  - name: run show interface stats
+    ios_command:
+      commands: show interface stats
+    register: interface_stats
+  
+  - name: display interface stats
+    debug:
+      var: interface_stats["stdout_lines"][0]
+
+  - name: run show routing table
+    ios_command:
+      commands: show ip route
+    register: routing_table
+  
+  - name: display routing table
+    debug:
+      var: routing_table["stdout_lines"][0]
+
+  - name: run show arp
+    ios_command:
+      commands: show arp
+    register: arp
+  
+  - name: display arp
+    debug:
+      var: arp["stdout_lines"][0]
+
+  - name: run show cdp neighbors
+    ios_command:
+      commands: show cdp neighbors
+    register: cdp_neighbors
+  
+  - name: display cdp neighbors
+    debug:
+      var: cdp_neighbors["stdout_lines"][0]  
+
+  - name: run show dns configuration
+    ios_command:
+      commands: show ip name-server
+    register: dns_configuration
+  
+  - name: display dns configuration
+    debug:
+      var: dns_configuration["stdout_lines"][0]
+
+  - name: run show ntp configuration
+    ios_command:
+      commands: sh run | i ntp
+    register: ntp_configuration
+  
+  - name: display ntp configuration
+    debug:
+      var: ntp_configuration["stdout_lines"][0]
+
+  - name: run show snmp configuration
+    ios_command:
+      commands: sh run | i snmp
+    register: snmp_configuration
+  
+  - name: display snmp configuration
+    debug:
+      var: snmp_configuration["stdout_lines"][0]
+
+  - name: run show vty configuration
+    ios_command:
+      commands: sh run | i vty
+    register: vty_configuration
+  
+  - name: display vty configuration
+    debug:
+      var: vty_configuration["stdout_lines"][0]
+
+  - name: run show aaa configuration
+    ios_command:
+      commands: sh run | i aaa
+    register: aaa_configuration
+  
+  - name: display aaa configuration
+    debug:
+      var: aaa_configuration["stdout_lines"][0]

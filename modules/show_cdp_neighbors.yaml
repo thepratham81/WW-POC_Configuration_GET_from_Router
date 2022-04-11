@@ -1,0 +1,18 @@
+---
+- name: Show examples
+  hosts: iosxe
+  gather_facts: no
+
+  tasks:
+  - name: GATHERING FACTS
+    ios_facts:
+      gather_subset: hardware
+
+  - name: run show cdp neighbors
+    ios_command:
+      commands: show cdp neighbors
+    register: cdp_neighbors
+  
+  - name: display cdp neighbors
+    debug:
+      var: cdp_neighbors["stdout_lines"][0]
